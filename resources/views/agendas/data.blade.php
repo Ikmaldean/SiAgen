@@ -59,7 +59,7 @@
       <form class="form-inline my-3 ml-auto" method="GET" action="/agenda/cari">
         <input type="date" class="form-control" name="cari">
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-      
+
         <a href="{{ url('/agenda') }}" class="btn btn-danger mx-3">Reset</a>
       </form>
     </div>
@@ -79,7 +79,7 @@
         </tr>
       </thead>
       <tbody>
-          @foreach ($agendas as $agenda)
+          @forelse ($agendas as $agenda)
         <tr>
           <td>
               <ul>
@@ -87,7 +87,7 @@
                       <li>{{ $worker->nama }}</li>
                   @endforeach
               </ul>
-          </td>        
+          </td>
           <td>{{ $agenda->agenda }}</td>
           <td>{{ $agenda->lokasi }}</td>
           <td>{{ date('d M Y', strtotime($agenda->waktu)) }}</td>
@@ -98,7 +98,7 @@
   <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal{{ $agenda->id }}">
     <i class="fas fa-pencil-alt"></i>
   </button>
-  
+
   <!-- Modal -->
   <div class="modal fade" id="modal{{ $agenda->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -174,7 +174,7 @@
             <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter{{ $agenda->id }}">
               <i class="fas fa-trash"></i>
             </button>
-  
+
             <!-- Modal -->
             <div class="modal fade" id="exampleModalCenter{{ $agenda->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
               <div class="modal-dialog modal-dialog-centered" role="document">
@@ -197,15 +197,15 @@
             </div>
         </td>
         </tr>
-        @endforeach
+        @empty
+          <tr>
+            <h1 class="text-center">Tidak Ada Data</h1>
+          </tr>
+        @endforelse
       </tbody>
-    </table> 
+    </table>
   </div>
 </div>
-
-  <script>
-    $('form').DataTable();
-</script>
 
   <script>
 

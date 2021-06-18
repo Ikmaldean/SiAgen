@@ -33,6 +33,9 @@
                 transform: translate(-50%,-50%);
                 font: 14px arial;
             }
+            td{
+                font-size: 15px;
+            }
             @media (max-width: 991.98px) {
                 .navbar-nav{
                     text-align: center
@@ -118,14 +121,16 @@
                     <a href="{{ url('/data-agenda') }}" class="nav-link">Lihat Selengkapnya</a>
                 </div>
                 <div class="row justify-content-between mt-5" data-aos="fade-up">
-                    @foreach ($agendas as $agenda)
-                    <div class="card col-5 mb-3" data-aos="fade-up" id="card-reload">
+                    @forelse ($agendas as $agenda)
+                    <div class="card col-5 mb-3 border-primary" data-aos="fade-up" id="card-reload">
                       <div class="card-header">
-                        <ul>
-                          @foreach ($agenda->workers as $worker)
-                              <li><b>{{ $worker->nama }}</b></li>
-                          @endforeach
-                        </ul>
+                          <div class="row justify-content-between">
+                            @foreach ($agenda->workers as $worker)
+                            <div class="col mr-2 card bg-primary">
+                                <b class="text-white">{{ $worker->nama }}</b>
+                            </div>
+                            @endforeach
+                          </div>
                       </div>
                       <div class="card-body">
                         <h5 class="card-title">{{ $agenda->agenda }}</h5>
@@ -133,7 +138,11 @@
                         <i class="fas fa-map-marker-alt text-grey fa-fw"></i><small class="ml-3">{{ $agenda->lokasi }}</small>
                       </div>
                     </div>
-                    @endforeach
+                    @empty
+                        <h4 class="text-center mx-auto">
+                            <strong>Tidak Ada Agenda Hari Ini</strong>
+                        </h4>
+                    @endforelse
                 </div>
             </div>
         </section>
@@ -183,28 +192,28 @@
                 <div class="row" data-aos="fade-up">
                     <div class="col-lg-4" data-aos-duration="1400">
                         <div class="team-member">
-                            <img class="mx-auto rounded-circle" src="{{asset('img/fotoikmal.png')}}" alt="" />
+                            <img class="mx-auto rounded-circle" src="{{asset('img/1621493557_fotoikmal.png')}}" alt="" />
                             <h4>Ikmal Dean Anugrah</h4>
-                            <p class="text-muted">Frontend</p>
+                            <p class="text-muted">Frontend Developer</p>
                         </div>
                     </div>
                     <div class="col-lg-4" data-aos-duration="1600">
                         <div class="team-member">
-                            <img class="mx-auto rounded-circle" src="FotoRaldy.JPG" alt="" />
+                            <img class="mx-auto rounded-circle" src="{{asset('img/ralsfoto.jpg')}}" alt="" />
                             <h4>Raldy Lutfiana</h4>
                             <p class="text-muted">UI Design / Frontend</p>
                         </div>
                     </div>
                     <div class="col-lg-4" data-aos-duration="1800">
                         <div class="team-member">
-                            <img class="mx-auto rounded-circle" src="assets/img/team/3.jpg" alt="" />
+                            <img class="mx-auto rounded-circle" src="{{asset('img/ronalfoto.jpg')}}" alt="" />
                             <h4>Ronald Abel Hermansyah</h4>
                             <p class="text-muted">Backend Developer</p>
                         </div>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-lg-8 mx-auto text-center"><p class="large text-muted">Buat Agenda Kegiatanmu Disini</p></div>
+                    <div class="col-lg-8 mx-auto text-center"><p class="large text-muted"></p></div>
                 </div>
             </div>
         </section>

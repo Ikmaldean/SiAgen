@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AgendaController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\WorkerControllers;
@@ -24,7 +25,7 @@ Route::get('/', [WelcomeController::class, 'index']);
 Route::get('/data-agenda', [WelcomeController::class, 'tampil']);
 Route::get('/data-pegawai', [WelcomeController::class, 'show']);
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
 // pegawai
 
@@ -55,3 +56,7 @@ Route::get('/agenda/hapus/{id}', [AgendaController::class, 'destroy']);
 Route::get('/agenda/cetak_pdf', [AgendaController::class, 'cetak_pdf']);
 
 Route::get('/agenda/cari', [SearchController::class, 'cari']);
+
+// admin
+Route::get('/admin', [AdminController::class, 'index']);
+Route::post('/admin', [AdminController::class, 'store']);
